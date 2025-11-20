@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Auto-Reproducido</title>
+
+    <style>
+        body {
+            margin: 0;
+            background: #000;
+            overflow: hidden;
+        }
+        video {
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+
+    <video id="video" autoplay muted playsinline>
+        <source src="video.mp4" type="video/mp4" />
+        Tu navegador no soporta video HTML5.
+    </video>
+
+    <script>
+        // Intento de reproducir (por si algunos navegadores bloquean el autoplay)
+        const vid = document.getElementById("video");
+        vid.play().catch(() => {
+            console.log("Autoplay bloqueado, se intentará reproducir al primer clic.");
+            document.body.addEventListener("click", () => vid.play(), { once: true });
+        });
+    </script>
+
+</body>
+</html>
